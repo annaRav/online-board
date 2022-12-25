@@ -1,0 +1,198 @@
+databaseChangeLog:
+  - changeSet:
+      id: create category
+      author: slava_liquibase
+      changes:
+        - createTable:
+            tableName: category
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: timestamp
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: create comment
+      author: slava_liquibase
+      changes:
+        - createTable:
+            tableName: comment
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: timestamp
+              - column:
+                  name: text
+                  type: varchar(255)
+              - column:
+                  name: owner_id
+                  type: BIGINT
+  - changeSet:
+      id: create good
+      author: slava_liquibase
+      changes:
+        - createTable:
+            tableName: good
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: timestamp
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: description
+                  type: varchar(255)
+              - column:
+                  name: category_id
+                  type: BIGINT
+  - changeSet:
+      id: create message
+      author: slava_liquibase
+      changes:
+        - createTable:
+            tableName: message
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: timestamp
+              - column:
+                  name: is_edited
+                  type: boolean
+              - column:
+                  name: from_user_id
+                  type: BIGINT
+              - column:
+                  name: to_user_id
+                  type: BIGINT
+  - changeSet:
+      id: create offer
+      author: slava_liquibase
+      changes:
+        - createTable:
+            tableName: offer
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: timestamp
+              - column:
+                  name: description
+                  type: varchar(255)
+              - column:
+                  name: label
+                  type: varchar(255)
+              - column:
+                  name: price
+                  type: numeric(19,2)
+              - column:
+                  name: category_id
+                  type: BIGINT
+              - column:
+                  name: owner_id
+                  type: BIGINT
+  - changeSet:
+      id: create roles
+      author: slava_liquibase
+      changes:
+        - createTable:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: role_name
+                  type: varchar(255)
+  - changeSet:
+      id: create users
+      author: slava_liquibase
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: birth_date
+                  type: timestamp
+              - column:
+                  name: email
+                  type: varchar(255)
+              - column:
+                  name: first_name
+                  type: varchar(255)
+              - column:
+                  name: last_name
+                  type: varchar(255)
+              - column:
+                  name: password
+                  type: varchar(255)
+              - column:
+                  name: phone_number
+                  type: varchar(255)
+              - column:
+                  name: status
+                  type: varchar(255)
+              - column:
+                  name: updated_date
+                  type: timestamp
+  - changeSet:
+      id: create users_roles
+      author: slava_liquibase
+      changes:
+        - createTable:
+            tableName: users_roles
+            columns:
+              - column:
+                  name: users_id
+                  type: BIGINT
+              - column:
+                  name: roles_id
+                  type: BIGINT

@@ -1,0 +1,30 @@
+version: "2.2"
+services:
+  onlineboard:
+    build:
+      context: .
+    container_name: onlineboard
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+    depends_on:
+      - db
+      - configservice
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    restart: on-failure
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=online-board
+  configservice:
+    build:
+      context: ../config-service
+    container_name: configservice
+    ports:
+      - "8888:8888"
